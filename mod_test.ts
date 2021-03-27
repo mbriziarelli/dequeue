@@ -1,5 +1,5 @@
 import { assertEquals } from "https://deno.land/std@0.90.0/testing/asserts.ts";
-import { Queue } from "./queue.ts";
+import { Queue } from "./mod.ts";
 
 Deno.test("Queue#dequeue()", () => {
   const queue = new Queue<number>(4);
