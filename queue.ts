@@ -1,7 +1,7 @@
-import { Node } from "./node.ts";
+import { QueueNode } from "./queue_node.ts";
 
 export class Queue<T> {
-  private nodes: Node<T>[] = [];
+  private nodes: QueueNode<T>[] = [];
 
   constructor(private capacity: number) {}
 
@@ -17,13 +17,13 @@ export class Queue<T> {
     return this.nodes.length === 0;
   }
 
-  enqueue(item: T | Node<T>) {
+  enqueue(item: T | QueueNode<T>) {
     if (this.isFull()) {
       return false;
-    } else if (item instanceof Node) {
+    } else if (item instanceof QueueNode) {
       this.nodes.push(item);
     } else {
-      this.nodes.push(new Node(item));
+      this.nodes.push(new QueueNode(item));
     }
 
     return true;
