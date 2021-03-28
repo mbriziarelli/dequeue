@@ -1,6 +1,12 @@
 import { assertEquals } from "https://deno.land/std@0.91.0/testing/asserts.ts";
 import { Queue } from "./mod.ts";
 
+Deno.test("Queue#constructor", () => {
+  const queue = new Queue<number>(10);
+
+  assertEquals(queue.capacity, 10);
+});
+
 Deno.test("Queue#dequeue()", () => {
   const queue = new Queue<number>(4);
 
@@ -81,4 +87,22 @@ Deno.test("Queue#isEmpty", () => {
   assertEquals(queue.isEmpty, true);
   queue.enqueue(10);
   assertEquals(queue.isEmpty, false);
+});
+
+Deno.test("Queue#Symbol.iterator", () => {
+  const queue = new Queue<number>(4);
+
+  queue.enqueue(10);
+  queue.enqueue(20);
+  queue.enqueue(30);
+  queue.enqueue(40);
+
+  const items = [];
+  for (const item of queue) {
+    items.push(item.value);
+  }
+
+  assertEquals(items.length, 4);
+  assertEquals(queue.size, 4);
+  assertEquals(items, [10, 20, 30, 40]);
 });

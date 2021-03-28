@@ -90,8 +90,8 @@ export class Queue<T> {
     return this.isEmpty ? null : this.#nodes[this.size - 1];
   }
 
-  *[Symbol.iterator]() {
-    for (const item in this.#nodes) {
+  *[Symbol.iterator](): Iterator<QueueNode<T>> {
+    for (const item of this.#nodes) {
       yield item;
     }
   }
