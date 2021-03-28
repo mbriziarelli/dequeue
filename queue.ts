@@ -1,5 +1,9 @@
 import { QueueNode } from "./queue_node.ts";
 
+function toQueueNode<T>(item: T | QueueNode<T>) {
+  return item instanceof QueueNode ? item : new QueueNode(item);
+}
+
 export class Queue<T> {
   private nodes: QueueNode<T>[] = [];
 
@@ -10,46 +14,31 @@ export class Queue<T> {
   }
 
   isFull() {
-    return this.nodes.length === this.capacity;
+    return this.size === this.capacity;
   }
 
   isEmpty() {
-    return this.nodes.length === 0;
+    return this.size === 0;
   }
 
   enqueue(item: T | QueueNode<T>) {
     if (this.isFull()) {
       return false;
-    } else if (item instanceof QueueNode) {
-      this.nodes.push(item);
     } else {
-      this.nodes.push(new QueueNode(item));
+      this.nodes.push(toQueueNode(item));
+      return true;
     }
-
-    return true;
   }
 
   dequeue() {
-    if (this.isEmpty()) {
-      return null;
-    } else {
-      return this.nodes.shift();
-    }
+    return this.isEmpty() ? null : this.nodes.shift();
   }
 
   get front() {
-    if (this.isEmpty()) {
-      return null;
-    } else {
-      return this.nodes[0];
-    }
+    return this.isEmpty() ? null : this.nodes[0];
   }
 
   get rear() {
-    if (this.isEmpty()) {
-      return null;
-    } else {
-      return this.nodes[this.nodes.length - 1];
-    }
+    return this.isEmpty() ? null : this.nodes[this.size - 1];
   }
 }
