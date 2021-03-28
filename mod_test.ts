@@ -1,4 +1,4 @@
-import { assertEquals } from "https://deno.land/std@0.90.0/testing/asserts.ts";
+import { assertEquals } from "https://deno.land/std@0.91.0/testing/asserts.ts";
 import { Queue } from "./mod.ts";
 
 Deno.test("Queue#dequeue()", () => {
@@ -64,21 +64,21 @@ Deno.test("Queue#size", () => {
   assertEquals(queue.size, 4);
 });
 
-Deno.test("Queue#isFull()", () => {
+Deno.test("Queue#isFull", () => {
   const queue = new Queue<number>(4);
 
-  assertEquals(queue.isFull(), false);
+  assertEquals(queue.isFull, false);
   queue.enqueue(10);
   queue.enqueue(20);
   queue.enqueue(30);
   queue.enqueue(40);
-  assertEquals(queue.isFull(), true);
+  assertEquals(queue.isFull, true);
 });
 
-Deno.test("Queue#isEmpty()", () => {
+Deno.test("Queue#isEmpty", () => {
   const queue = new Queue<number>(4);
 
-  assertEquals(queue.isEmpty(), true);
+  assertEquals(queue.isEmpty, true);
   queue.enqueue(10);
-  assertEquals(queue.isEmpty(), false);
+  assertEquals(queue.isEmpty, false);
 });
